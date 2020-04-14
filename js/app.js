@@ -1,9 +1,6 @@
-// BUGS TO FIX
-// - enemy speed is often slower than the specified min
-
 // Random number function
 function randomNum(min, max) {
-  return Math.random() * (max - min + 1);
+  return Math.random() * (max - min) + min;
 }
 
 class Enemy {
@@ -35,9 +32,9 @@ class Player {
     this.sprite = 'images/char-boy.png';
   }
   update() {
-    
+    // No code needed here
   }
-  render() {
+  render() { // Draw the player on screen
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
   handleInput(k) { // k = key pressed
@@ -50,9 +47,13 @@ class Player {
           break;
         }
       case 'up':
-        if (this.y > 0) {
+        if (this.y > 100) {
           this.y -= 82;
           break;
+        } else if (this.y < 100) { // Get to the top
+          console.log('You win');
+          this.x = 101;
+          this.y = 380;
         } else {
           break;
         }
