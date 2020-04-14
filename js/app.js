@@ -1,38 +1,58 @@
+// TO DO
+//
+// OPTIONAL EXTRAS
+// - Player selection
+// - Win animation
+// - Lose animation
+// - Score
+// - Lives (hearts)
+// - Levels
+// - Collectibles (gems)
+// - Obstacles (rocks)
+
+
+
 // Random number function
 function randomNum(min, max) {
-  return Math.random() * (max - min) + min;
+  return Math.floor(Math.random() * (max - min)) + min;
 }
 
 class Enemy {
   constructor() { // Variables applied to each instance
     this.sprite = 'images/enemy-bug.png';
-    this.x = (-100 - randomNum(10, 50)); // Position off-screen to the left - make random
-    this.yArr = [55, 135, 220]; // One for each row
-    this.y = this.yArr[Math.floor(randomNum(1, 3))]; // Choose one from the array at random
-    this.speed = randomNum(100, 400); // Variable speed, at random
+    this.x = (-100 - randomNum(10, 50)); // Position off-screen at random distance to the left
+    this.yArr = [60, 140, 220]; // One for each row
+    this.y = this.yArr[randomNum(0, 3)]; // Choose one from the array at random
+    this.speed = randomNum(50, 400); // Random speed
   }
   update(dt) { // Move the enemy along the x axis
     this.x += (this.speed * dt); // Multiply by dt to run same speed on all computers
-    if (this.x > 505) { // Once it reaches the end, reset it
+    if (player.x + 60 > this.x && // If player collides with an enemy, restart player
+      player.x < this.x + 60 &&
+      player.y + 60 > this.y &&
+      player.y < this.y + 60) {
+        player.x = 200;
+        player.y = 380;
+    } else if (this.x > 505) { // Once enemy reaches the end, restart enemy
       this.x = -100;
-      this.speed = randomNum(100, 400);
-      this.y = this.yArr[Math.floor(randomNum(1, 3))];
+      this.y = this.yArr[randomNum(0, 3)];
+      this.speed = randomNum(50, 400);
     }
   }
   render() { // Draw the enemy on screen
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
+
 };
 
 // Player class
 class Player {
   constructor() { // Variables applied to each instance
-    this.x = 201;
+    this.x = 200;
     this.y = 380;
     this.sprite = 'images/char-boy.png';
   }
-  update() {
-    // No code needed here
+  update() { // No code needed here, used by engine
   }
   render() { // Draw the player on screen
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -41,17 +61,16 @@ class Player {
     switch (k) {
       case 'left':
         if (this.x > 20) {
-          this.x -= 101;
+          this.x -= 100;
           break;
         } else {
           break;
         }
       case 'up':
         if (this.y > 100) {
-          this.y -= 82;
+          this.y -= 80;
           break;
         } else if (this.y < 100) { // Get to the top
-          console.log('You win');
           this.x = 101;
           this.y = 380;
         } else {
