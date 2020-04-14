@@ -5,16 +5,32 @@
 // - Win animation
 // - Lose animation
 // - Score
-// - Lives (hearts)
 // - Levels
 // - Collectibles (gems)
-// - Obstacles (rocks)
 
 
 
 // Random number function
 function randomNum(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
+}
+
+// Display the score
+const score = {
+  render: function() {
+    ctx.font = "24px Courier New";
+    ctx.fillText(`Score:`, 0, 40);
+  }
+}
+
+class Life {
+  constructor(n) {
+    this.sprite = 'images/Heart.png';
+    this.x = 300 + (n*30);
+  }
+  render() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, 10, 26, 40);
+  }
 }
 
 class Enemy {
@@ -27,13 +43,19 @@ class Enemy {
   }
   update(dt) { // Move the enemy along the x axis
     this.x += (this.speed * dt); // Multiply by dt to run same speed on all computers
-    if (player.x + 60 > this.x && // If player collides with an enemy, restart player
+    if (player.x + 60 > this.x && // If player collides with an enemy
       player.x < this.x + 60 &&
       player.y + 60 > this.y &&
       player.y < this.y + 60) {
+        // Restart player
         player.x = 200;
         player.y = 380;
-    } else if (this.x > 505) { // Once enemy reaches the end, restart enemy
+        // Minus one life
+        lives.pop();
+          if (lives.length === 0) {
+            alert('Game over. Refresh to refill lives.');
+          }
+    } else if (this.x > 505) { // Once enemy reaches the right, restart from left
       this.x = -100;
       this.y = this.yArr[randomNum(0, 3)];
       this.speed = randomNum(50, 400);
@@ -50,7 +72,7 @@ class Player {
   constructor() { // Variables applied to each instance
     this.x = 200;
     this.y = 380;
-    this.sprite = 'images/char-boy.png';
+    this.sprite = 'images/char-cat-girl.png';
   }
   update() { // No code needed here, used by engine
   }
@@ -71,7 +93,7 @@ class Player {
           this.y -= 80;
           break;
         } else if (this.y < 100) { // Get to the top
-          this.x = 101;
+          this.x = 100;
           this.y = 380;
         } else {
           break;
@@ -97,6 +119,7 @@ class Player {
 // Instantiate the player and 3 enemies
 const allEnemies = [new Enemy(), new Enemy(), new Enemy()];
 const player = new Player();
+const lives = [new Life(1), new Life(2), new Life(3)];
 
 // Listen for key presses and send the keys to the Player.handleInput() method
 document.addEventListener('keyup', function(e) {
