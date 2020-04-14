@@ -1,13 +1,23 @@
+// Random number function
+function randomNum(min, max) {
+  return Math.random() * (max - min + 1);
+}
+
 class Enemy {
-  constructor() { // Variables applied to each enemy
+  constructor() { // Variables applied to each instance
     this.sprite = 'images/enemy-bug.png';
-    this.x = -120; // Position off-screen to the left - make random
+    this.x = (-80 - randomNum(10, 50)); // Position off-screen to the left - make random
     this.yArr = [55, 135, 220]; // One for each row
-    this.y = 55; // Choose one from the array at random
-    this.speed = 50; // Variable speed, at random
+    this.y = this.yArr[Math.floor(randomNum(1, 3))]; // Choose one from the array at random
+    this.speed = randomNum(100, 400); // Variable speed, at random
   }
   update(dt) { // Move the enemy along the x axis
     this.x += (this.speed * dt); // Multiply by dt to run same speed on all computers
+    if (this.x > 505) { // Once it reaches the end, reset it
+      this.x = -50;
+      this.speed = randomNum(100, 400);
+      this.y = this.yArr[Math.floor(randomNum(1, 3))];
+    }
   }
   render() { // Draw the enemy on screen
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -16,7 +26,7 @@ class Enemy {
 
 // Player class
 class Player {
-  constructor() {
+  constructor() { // Variables applied to each instance
     this.x = 201;
     this.y = 380;
     this.sprite = 'images/char-boy.png';
@@ -27,25 +37,20 @@ class Player {
   render() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
-  handleInput(k) {
-    const move = 40;
+  handleInput(k) { // k = key pressed
+    const m = 40; // m = the distance each keypress moves
     switch (k) {
       case 'left':
-        console.log('Pressed left');
-        this.x -= move;
+        this.x -= m;
         break;
       case 'up':
-        console.log('Pressed up');
-        this.y -= move;
+        this.y -= m;
         break;
       case 'right':
-        console.log('Pressed right');
-        this.x += move;
+        this.x += m;
         break;
       case 'down':
-        console.log('Pressed down');
-        this.y += move;
-        break;
+        this.y += m;
     }
   }
 };
