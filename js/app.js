@@ -15,6 +15,11 @@ function randomNum(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+// Reset score and lives
+function resetGame() {
+  myScore.init();
+  lives.push(new Life(1), new Life(2), new Life(3));
+}
 
 // Keep score
 const myScore = function() {
@@ -60,14 +65,14 @@ class Enemy {
       player.x < this.x + 60 &&
       player.y + 60 > this.y &&
       player.y < this.y + 60) {
-        // Restart player
+        // Reset player
         player.x = 200;
         player.y = 380;
         // Minus one life
         lives.pop();
-          if (lives.length === 0) {
-            alert('Game over. Refresh to refill lives.');
-          }
+        if (lives.length === 0) { // No lives left
+          resetGame();
+        }
     } else if (this.x > 505) { // Once enemy reaches the right, restart from left
       this.x = -100;
       this.y = this.yArr[randomNum(0, 3)];
