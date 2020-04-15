@@ -155,7 +155,7 @@ var Engine = (function(global) {
 
         player.render();
 
-        score.render();
+        myScore.render();
         lives.forEach(function(life) {
           life.render();
         });

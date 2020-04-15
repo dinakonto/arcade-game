@@ -15,13 +15,26 @@ function randomNum(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-// Display the score
-const score = {
-  render: function() {
-    ctx.font = "24px Courier New";
-    ctx.fillText(`Score:`, 0, 40);
+
+// Keep score
+const myScore = function() {
+  let scoreText = `Score: `;
+  let score = 0;
+  return {
+    init: function() {
+      score = 0;
+      return scoreText + score;
+    },
+    update: function(n) {
+      score += n;
+      return scoreText + score;
+    },
+    render: function() {
+      ctx.font = "20px Courier New";
+      ctx.fillText(scoreText + score, 0, 40);
+    }
   }
-}
+}();
 
 class Life {
   constructor(n) {
@@ -95,6 +108,7 @@ class Player {
         } else if (this.y < 100) { // Get to the top
           this.x = 100;
           this.y = 380;
+          myScore.update(100);
         } else {
           break;
         }
