@@ -10,31 +10,11 @@ h1 {
   text-shadow: 3px 2px #246613;
 }
 
-#game-over {
-  display: flex;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: white;
-  width: 100%;
-  height: 100%;
-  padding-top: 40px;
-}
-
-#game-over h1 {
-  font-size: 3em;
-  color: #ED1615;
-  text-shadow: 3px 2px #980D0D;
-}
-
-#game-over p {
+p {
   font-size: 1.5em;
 }
 
-#game-over button {
+button {
   font-family: 'Courier New', sans-serif;
   border-radius: 2px;
   background-color: #2747E3;
@@ -46,14 +26,33 @@ h1 {
   border-bottom: 4px solid #1A309E;
 }
 
-#game-over button:hover {
+button:hover {
   cursor: pointer;
 }
 
-#game-over button:focus {
+button:focus {
   outline: none;
 }
 
-#game-over button:active {
+button:active {
   background-color: #4F67D3;
+}
+
+#game-over {
+  display: flex;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  padding-top: 100px;
+}
+
+#game-over h1 {
+  color: #ED1615;
+  text-shadow: 3px 2px #980D0D;
 }
