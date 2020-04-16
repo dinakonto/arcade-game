@@ -1,11 +1,3 @@
-// TO DO
-//
-// OPTIONAL EXTRAS
-// - Player selection
-// - Win animation
-// - Lose animation
-// - Levels
-
 /*
  * FUNCTIONS
  */
@@ -93,7 +85,7 @@ class Enemy {
       player.x < this.x + 60 &&
       player.y + 60 > this.y &&
       player.y < this.y + 60) {
-        player.reset(); // Put player back at the bottom
+        player.reset();
         lives.pop(); // Minus one life
         if (lives.length === 0) { // No lives left
           loseGame();
