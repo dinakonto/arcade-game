@@ -154,7 +154,7 @@ var Engine = (function(global) {
         });
 
         player.render();
-
+        gem.render();
         myScore.render();
         lives.forEach(function(life) {
           life.render();
