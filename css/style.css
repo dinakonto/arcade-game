@@ -1,3 +1,52 @@
 body {
     text-align: center;
+    font-family: 'Courier New', sans-serif;
+}
+
+#game-over {
+  display: flex;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  padding-top: 40px;
+}
+
+#game-over h1 {
+  font-size: 3em;
+  color: #ED1615;
+  text-shadow: 3px 2px #980D0D;
+}
+
+#game-over p {
+  font-size: 1.5em;
+}
+
+#game-over button {
+  font-family: 'Courier New', sans-serif;
+  border-radius: 2px;
+  background-color: #2747E3;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  font-size: 1.2em;
+  border-right: 4px solid #1A309E;
+  border-bottom: 4px solid #1A309E;
+}
+
+#game-over button:hover {
+  cursor: pointer;
+}
+
+#game-over button:focus {
+  outline: none;
+}
+
+#game-over button:active {
+  background-color: #4F67D3;
 }

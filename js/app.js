@@ -19,11 +19,26 @@ function randomNum(min, max) {
 function resetGame() {
   myScore.init();
   lives.push(new Life(1), new Life(2), new Life(3));
+  let gameOverScreen = document.querySelector('#game-over');
+  gameOverScreen.style.display = "none";
 }
 
 // Player loses all three lives
 function loseGame() {
+  let gameOverScreen = document.querySelector('#game-over');
+  let finalScoreArea = document.querySelector('#final-score');
+  let finalScore = myScore.final();
+  let playAgainBtn = document.querySelector('#play-again-btn');
+  gameOverScreen.style.display = "flex";
+  finalScoreArea.innerText = finalScore;
+  playAgainBtn.addEventListener('click', function() {resetGame()});
+}
 
+// When player makes it to the top
+function winLevel() {
+  player.reset();
+  gem.reset();
+  myScore.update(100);
 }
 
 /*
@@ -39,13 +54,6 @@ class Life {
   render() {
     ctx.drawImage(Resources.get(this.sprite), this.x, 10, 26, 40);
   }
-}
-
-// When player makes it to the top
-function winLevel() {
-  player.reset();
-  gem.reset();
-  myScore.update(100);
 }
 
 // Gems class
@@ -88,7 +96,7 @@ class Enemy {
         player.reset(); // Put player back at the bottom
         lives.pop(); // Minus one life
         if (lives.length === 0) { // No lives left
-          resetGame();
+          loseGame();
         }
     } else if (this.x > 505) { // Once enemy reaches the right, restart from left
       this.x = -100;
@@ -118,7 +126,6 @@ class Player {
       this.x < gem.x + 60 &&
       this.y + 60 > gem.y &&
       this.y < gem.y + 60) {
-        console.log(`You got a gem`);
         gem.collect();
       }
   }
@@ -187,6 +194,9 @@ const myScore = function() {
     render: function() {
       ctx.font = "20px Courier New";
       ctx.fillText(scoreText + score, 0, 40);
+    },
+    final: function() {
+      return score;
     }
   }
 }();
