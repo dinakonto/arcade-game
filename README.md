@@ -1,20 +1,23 @@
 # Classic Arcade Game Clone Project
 
-## Table of Contents
+A simple Frogger-style game, made as a student project for Udacity's [Front-End Development Nanodegree](https://www.udacity.com/course/front-end-web-developer-nanodegree--nd0011).
 
-- [Instructions](#instructions)
-- [Contributing](#contributing)
+## Install
+Download the repo, or clone with:
 
-## Instructions
+`$ git clone https://github.com/dinakonto/arcade-game.git`
 
-Use this [rubric](https://review.udacity.com/#!/rubrics/15/view) for self-checking your submission.
+Then open `index.html` in your browser to play.
 
-Make sure the functions you write are **object-oriented** - either class functions (like `Player` and `Enemy`) or class prototype functions such as `Enemy.prototype.checkCollisions`. Also make sure that the keyword `this` is used appropriately within your class and class prototype functions to refer to the object the function is called upon.
+## How to play
+Use the arrow keys (left &larr; right &rarr; up &uarr; down &darr;) to help your player reach the water, collecting gems and avoiding any bugs along the way.
 
-Your **README.md** file should be updated with instructions on both how to 1. Run and 2. Play your arcade game.
+- **Reach the water** for 100 points.
+- **Collect a gem** for 50 points.
+- **Collide with a bug** to lose 1 heart and start again from the bottom.
+- **Lose all 3 hearts** and it's game over.
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+🕹 Good luck!
 
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+## Screenshot
+![Screenshot of the game](/images/screenshot.png)
